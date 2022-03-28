@@ -56,6 +56,7 @@ def ConnectServer():
 
                         # Closing connection
                         Client_Socket.close()
+                        exit()
                 else:
                     # Encoding MSGToSend
                     encodedMSGToSend = payload.encode('utf-8')
@@ -76,6 +77,9 @@ def ConnectServer():
             if decodedReceivedMSG == '[WARNING]: Server is full':
                 # Close connection
                 Client_Socket.close()
+
+                # Exiting
+                exit()
             else:
                 # Printing decodedReceivedMSG
                 print(f'{decodedReceivedMSG}')
