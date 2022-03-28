@@ -29,7 +29,7 @@ def MakeSocket():
     # Handle function (To handle client)
     def Handle():
         # Check if clients list is full
-        if len(clients) >= 5:
+        if len(clients) >= 5 or len(clients) == 5:
             # NHandle function
             def NHandle():
                 while True:
@@ -41,6 +41,10 @@ def MakeSocket():
 
                     # Closing connection
                     client.close()
+
+                    # MSG when connection is already closed
+                    print(f'[WARNING]: {address} tried to connect to the server')
+
                     exit()
 
             # New clients can't connect.Reason is that 5 clients are MAX on the server
@@ -86,8 +90,8 @@ def MakeSocket():
                                 else:
                                     Client.send(f'[INFO]: {address} disconnected'.encode('utf-8'))
 
-                            # Exiting
-                            exit()
+                            # Removing client from clients list
+                            clients.remove(client)
                     else:
                         # Printing decodedReceivedMSG
                         print(f'{decodedClientHostname}: {decodedReceivedMSG}')
@@ -100,7 +104,7 @@ def MakeSocket():
                                 Client.send(f'{decodedClientHostname}: {decodedReceivedMSG}'.encode('utf-8'))
 
     # Making threads
-    counter1 = 0
+    counter1 = 1
     limit = 5
     while counter1 <= limit:
         handleThread = threading.Thread(target=Handle)
