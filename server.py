@@ -62,6 +62,16 @@ def MakeSocket():
 
             # MSG when client connects
             print(f'[INFO]: Connection from {address}')
+            
+            # Send MSG when client connects to other clinets
+            for Client in clients:
+                if Client == client:
+                    pass
+                else:
+                    if len(clients) == 0:
+                        pass
+                    else:
+                        Client.send(f'[INFO]: {decodedClientHostname} joined!'.encode('utf-8'))
 
             # Main loop for Handle function
             while True:
