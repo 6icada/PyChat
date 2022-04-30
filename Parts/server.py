@@ -102,6 +102,9 @@ def MakeSocket():
 
                             # Removing client from clients list
                             clients.remove(client)
+
+                            # Closing Server_Socket
+                            Server_Socket.close()
                     else:
                         # Printing decodedReceivedMSG
                         print(f'{decodedClientHostname}: {decodedReceivedMSG}')
